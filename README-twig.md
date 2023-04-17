@@ -4,7 +4,7 @@ In the template (html), use this format:
 ```
 {% extends "layout.html" %}
 
-{% block page %}
+{% block content %}
             <!-- HTML code -->
 {% endblock %}
 ```
