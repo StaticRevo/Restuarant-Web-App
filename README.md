@@ -4,5 +4,6 @@ The work was divided as follows:
 
 
 **Isaac Attard:** Home Page, Login Page, Register Page 
+
 **Luca Gatt:**    
 **Kayla Formosa:**   
