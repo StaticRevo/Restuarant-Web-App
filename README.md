@@ -3,4 +3,6 @@ This repository contains the code and documentation to the Restaurant Website th
 The work was divided as follows:
 
 
-**Isaac Attard:** Home Page, Login Page, Register Page **Luca Gatt:**    **Kayla Formosa:**   
+**Isaac Attard:** Home Page, Login Page, Register Page 
+**Luca Gatt:**    
+**Kayla Formosa:**   
