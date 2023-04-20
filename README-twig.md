@@ -1,5 +1,7 @@
 For this website, Twig shall be used.
 
+Note that the layout for templates (`layout.html`) can be found in this branch, under `templates`.
+
 In the template (html), use this format:
 ```
 {% extends "layout.html" %}
