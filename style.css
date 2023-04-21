@@ -229,13 +229,12 @@ section p {
 .news-item,
 .news-item2 {
     position: absolute;
-    top: 0;
-    bottom: 17%;
+    top: 17%;
     margin: auto;
     border: 2px solid #ccc;
     padding: 20px;
-    width: 400px;
-    height: 350px;
+    width: 460px;
+    height: 550px;
 }
 .news-item {
     left: 0%;
@@ -243,7 +242,7 @@ section p {
     background-color: #29304B;
 }
 .news-item2 {
-    left: 65%;
+    left: 64%;
     right: 0%;
     background-color: #29304B;
 }
@@ -254,7 +253,7 @@ section p {
 }
 .news-item p,
 .news-item2 p {
-    font-size: 15px;
+    font-size: 18px;
 }
 footer{
     bottom: 0;
