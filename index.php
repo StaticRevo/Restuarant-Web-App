@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="style.css">
         <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9877e2c6ca.js" crossorigin="anonymous"></script>
-        
+
     </head>
     <body>
         <div class="container">
@@ -54,13 +54,11 @@
                         <h3>Updated Menu</h3>
                         <p>"Exciting news for foodies! We're thrilled to announce the launch of our revamped menu, now available on our website. Our talented chefs have been hard at work, crafting delicious new dishes and reimagining old favorites. From savory starters to decadent desserts, there's something for everyone to enjoy. Visit our website to check out the new menu and make a reservation today!"</p>
                         <br>
-                        <a href="#">Read more</a>
                     </div>
                     <div class="news-item2">
                         <h3>Now Opened at Bugibba</h3>
                         <p>We're thrilled to announce the opening of our newest restaurant in Bugibba! Our team has been working tirelessly to bring you a dining experience like no other. From the stunning decor to the delectable menu, every detail has been carefully crafted to delight your senses. We can't wait to welcome you to our new location and share our passion for food with the local community.</p>
                         <br>
-                        <a href="#">Read more</a>
                     </div>
                 </div>
                
