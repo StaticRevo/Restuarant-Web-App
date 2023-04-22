@@ -9,9 +9,10 @@
         <link rel="stylesheet" href="style.css">
         <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9877e2c6ca.js" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="css/{{ filename }}-style.css">
     </head>
-    <body>
-        <div class="container">
+    <body class="container">
             <header>
                 <a href="index.php"><img class="logo" src="images/logoNotext.png" alt="Logo"></a>
                 <nav>
@@ -28,8 +29,10 @@
                     <div class = "bx bx-menu" id="menu-icon"></div>
                 </div>
             </header>
+            
             {% block content %}
             {% endblock %}
+            
             <footer>
                 <div class = "col-1">
                     <h3>Useful links</h3>
