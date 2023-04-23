@@ -26,7 +26,7 @@ The below code shall be used in all the `.php` files. Code may need to be added 
     
     
     // Render view
-    echo $twig->render('about.html', ['title' => $title, 'filename' => $filename]);
+    echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
 ?>
 ```
 
