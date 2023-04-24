@@ -16,4 +16,11 @@ else
 //Load from the DB
 $db = new Db();
 
-echo $twig->render('register.html');
+// adds to the title tag
+$title = "Register";
+    
+// completes the CSS filename
+$filename = "register";
+
+// Render view
+echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
