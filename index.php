@@ -16,4 +16,12 @@ else
 //Load from the DB
 $db = new Db();
 
-echo $twig->render('index.html');
+// adds to the title tag
+$title = "Home";
+    
+// completes the CSS filename
+$filename = "index";
+
+// Render view
+echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
+//echo $twig->render("index.html");
