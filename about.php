@@ -1,10 +1,6 @@
 <?php
 
-require_once __DIR__.'/bootstrap.php';
-require_once __DIR__.'/database.php';
-
-//Get db object
-$db = new Db();   
+require_once __DIR__.'/bootstrap.php';   
 
 
 // adds to the title tag
@@ -15,3 +11,5 @@ $filename = "about";
 
 // Render view
 echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
+
+?>
