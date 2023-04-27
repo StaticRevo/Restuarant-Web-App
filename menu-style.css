@@ -1,0 +1,57 @@
+/* Style for the menu page */
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 70px; /* adjust this value based on your navbar height */
+}
+
+.menu-item {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 10px;
+    width: calc(33.33% - 20px); /* 3 items in a row */
+}
+
+.menu-item h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.menu-item p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .menu-item {
+        width: 100%;
+    }
+}
