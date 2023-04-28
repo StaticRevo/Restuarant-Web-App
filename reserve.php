@@ -110,7 +110,7 @@
                    $formvalues['email']       .",".
                    $formvalues['mobile']      .","      ;
         
-        $genTableFields = "id,name,surname,email,`mobile-num`";
+        $genTableFields = "name,surname,email,`mobile-num`";
         // if reservation
         if ($formvalues['messageType'] === 'reservation'){
             $db -> query("INSERT INTO `forms-reservation`(`reservation-date`,{$genTableFields}) VALUES (" .
