@@ -3,12 +3,21 @@
     require_once __DIR__.'/bootstrap.php';
     require_once __DIR__.'/database.php';
     require_once __DIR__.'/gen-php/clean_input.php';
-    
-    $db = new Db();
-    
 
+    
+    // adds to the title tag
+    const title = "Reservations";
+
+    // completes the CSS filename
+    const filename = "reserve";
+    
+//    $db = new Db();
+    
+    $validations = array();
+//    $formvalues = array();
     function validate($formvalues){
-        if (!empty($formvalues['name']){
+        // check name
+        if (!empty($formvalues['name'])) {
             ;
         }
         else
@@ -16,8 +25,9 @@
             $nameErr = "Name is required";
             $validations['nameError'] = $nameErr;
         }
-            
-        if (!empty($formvalues['surname']){
+        
+        // check surname
+        if (!empty($formvalues['surname'])) {
             ;
         }
         else
@@ -25,8 +35,8 @@
             $surnameErr = "Surname is required";
             $validations['surnameError'] = $surnameErr;
         }
-         
-        //Check email field
+        
+        // Check email field
         if (!empty($_POST["email"])) {
             $email = clean_input($_POST["email"]);
             //FILTER_VALIDATE_EMAIL is one of many validation filters: https://www.php.net/manual/en/filter.filters.validate.php
@@ -41,25 +51,57 @@
             $emailErr = "Email is required";
             $validations['emailError'] = $emailErr;
         }
-
         
-        if ($_POST[]){
-            //Check message field   
-            if (!empty($_POST["message"])) {
-                $message = clean_input($_POST["message"]);
-                if(strlen($message)>150){
-                    $messageErr=  "Messages cannot be longer than 150 characters.";
+        // check mobile
+        if (!empty($formvalues['mobile'])) {
+            if (!is_numeric($formvalues['mobile'])){
+                $validations['mobileError'] = 'You did not enter a number.';
+            } else
+            if (($formvalues['mobile'] > 8)){
+                $validations['mobileError'] = 'You did not enter a valid mobile number.';
+            }
+        }
+        else
+        {
+            $validations['mobileError'] = "Mobile is required";
+        }
+        
+        // check messageType - should not need checking since cannot be blank.
+        if (!empty($formvalues['messageType'])) {
+            ;
+        }
+        else
+        {
+            $validations['typeError'] = "Message type is required";
+        }
+        
+        if (!empty($formvalues['messageType'])) { // need messageType to work with it
+            if ($formvalues['messageType'] != 'Reservation'){
+                //Check message field   
+                if (!empty($formvalues['message'])) {
+                    // $message = clean_input($_POST["message"]); // already called function
+                    if(strlen($formvalues['message']) > 150){
+                        $messageErr=  "Messages cannot be longer than 150 characters.";
+                        $validations['messageError'] = $messageErr;
+                    }
+                }
+                else {
+                    $messageErr = "Message is required";
                     $validations['messageError'] = $messageErr;
                 }
-            }
-            else {
-                $messageErr = "Message is required";
-                $validations['messageError'] = $messageErr;
+            } else {
+                // check datetime
+                if (!empty($_POST["datetime"])) {
+
+                } else {
+                    $validations['datetime'] = "Date and time are required";
+                }
             }
         }
 
         return $formvalues;
     }
+    
     
     function execSQL($formvalues){
         // database has 2 tables: `forms-reservation` and `forms-contact`
@@ -68,25 +110,31 @@
         $genVar = $formvalues['name']           .",".
                    $formvalues['surname']     .",".
                    $formvalues['email']       .",".
-                   $formvalues['mobile']      .","      ;
-
+                   $formvalues['mobile']            ;
+        
+        $genTableFields = "name,surname,email,`mobile-num`";
         // if reservation
-        if ($_POST['dropdown-form'] === 'reservation'){
-            $result = $db -> query("INSERT INTO forms-reservation(gen-form-id,datetime) VALUES (" .
-                                   $genVar .
-                               $formvalues['datetime']
-                               .")");
+        if ($formvalues['messageType'] === 'reservation'){
+            $db = new Db();
+            $db -> query("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
+                               
+                           $formvalues['datetime'] .",".
+                         $genVar
+                           .")");
         }
         // if message
         else{
-            $result = $db -> query("INSERT INTO forms-contact(messageType,message) VALUES (" .
-                                   $genVar .
-                               $formvalues['messageType']    .",".
-                               $formvalues['message']
-                               .")");
+            
+            $db = new Db();
+            $db -> query("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
+                               $genVar .
+                           $formvalues['messageType']    .",".
+                           $formvalues['message']
+                           .")");
         }
     }
     
+    // $result = $db -> query("");
 
 
 
@@ -101,26 +149,25 @@
             echo "This time is already booked."
         }*/
         
-        $formvalues['name']           = clean_input( $_POST('name')       );
-        $formvalues['surname']        = clean_input( $_POST('surname')    );
-        $formvalues['email']          = clean_input( $_POST('email')      );
-        $formvalues['mobile']         = clean_input( $_POST('mobile')     );
-        $formvalues['datetime']       = clean_input( $_POST('datetime')   );
-        $formvalues['messageType']    = clean_input( $_POST('messageType'));
-        $formvalues['message']        = clean_input( $_POST('message')    );
+        
+        
+        $formvalues['name']           = clean_input( $_POST['name']       );
+        $formvalues['surname']        = clean_input( $_POST['surname']    );
+        $formvalues['email']          = clean_input( $_POST['email']      );
+        $formvalues['mobile']         = clean_input( $_POST['mobile']     );
+        $formvalues['datetime']       = clean_input( $_POST['datetime']   );
+        $formvalues['messageType']    = clean_input( $_POST['type']);
+        $formvalues['message']        = clean_input( $_POST['message']    );
         
         $formvalues = validate($formvalues);
-        execSQL($formvalues);
+        if (count($validations) === 0){
+            execSQL($formvalues);
+        } else {
+            // Render view with error messages
+            echo $twig->render("{$filename}.html", ['validations' => $validations, 'title' => title, 'filename' => filename]);
+        }
+    } else {
+        // Render view
+        echo $twig->render(filename.".html", ['title' => title, 'filename' => filename]);
     }
-        
-    
-    // adds to the title tag
-    $title = "Reservations";
-    
-    // completes the CSS filename
-    $filename = "reserve";
-    
-    
-    // Render view
-    echo $twig->render("{$filename}.html", ['title' => $title, 'filename' => $filename]);
 ?>
