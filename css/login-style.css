@@ -116,3 +116,11 @@
 .box form .inputBox input[type="submit"]:active{
     opacity: 0.8;
 }
+.error{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    font-size: 1em;
+    text-align: center;
+}
