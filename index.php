@@ -25,3 +25,5 @@ $filename = "index";
 // Render view
 echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
 //echo $twig->render("index.html");
+
+?>
