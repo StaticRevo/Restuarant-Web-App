@@ -164,7 +164,7 @@
             execSQL($formvalues);
         } else {
             // Render view with error messages
-            echo $twig->render("{$filename}.html", ['validations' => $validations, 'title' => title, 'filename' => filename]);
+            echo $twig->render(filename.".html", ['validations' => $validations, 'title' => title, 'filename' => filename]);
         }
     } else {
         // Render view
