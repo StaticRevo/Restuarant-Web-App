@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="profile">
+    <div class="profile-picture">
+        <img src="{{ user.profile_picture }}" alt="{{ user.username }} profile picture">
+    </div>
+    <div class="profile-info">
+        <h1>{{ user.username }}</h1>
+        <p>{{ user.bio }}</p>
+    </div>
+</section>
+<section class="favorites">
+    <h2>Favorites</h2>
+    <ul>
+        {% for favorite in user.favorites %}
+            <li><a href="{{ favorite.link }}">{{ favorite.title }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

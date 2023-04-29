@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            
+            <section>
+<!--                <form action="{{ filename }}.php" id="reservation-form" method="post">-->
+<!--                    <h3>Book a reservation</h3>-->
+                    
+                    <!--<div>
+                        <label for="name-r">Name:</label>
+                        <input name="name-r">
+                    </div>
+                    <div>
+                        <label for="surname-r">Surname:</label>
+                        <input name="surname-r">
+                    </div>
+                    
+                    <div id="form-datetime">
+                        <label for="datetime-r">Insert date and time:</label>
+                        <input id="datetime-r" name="datetime-r" type="datetime-local" />
+                    </div>-->
+<!--                    <p>(php Check with database if available. If not, try again.)</p>-->
+
+<!--                    <input class="btn" name="submit-reservation" type="submit" value="Book a reservation" />-->
+<!--                </form>-->
+                
+                <form action="{{ filename }}.php" id="contact-form" method="post">
+                    <h3>Contact Us or Book a Table</h3>
+                    
+                    <div>
+                        <label for="name">Name:</label>
+                        <input name="name" required>
+                    </div>
+                    <div>
+                        <label for="surname">Surname:</label>
+                        <input name="surname" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input name="email" type="email">
+                    </div>
+                    <div>
+                        <label for="mobile">Mobile Number:</label>
+                        <input name="mobile" type="tel" required>
+                    </div>
+                    
+                    <div>
+                        <label for="type">Message Type:</label>
+                        <select name="type" id="dropdown-form" name="dropdown-form" required>
+                            <option value="question">Question</option>
+                            <option value="complaint">Complaint</option>
+                            <option value="reservation">Reservation</option>
+                        </select>
+                    </div>
+                    
+                    <div id="form-message"> <!-- for contact -->
+                        <label for="message">Message:</label>
+                        <textarea name="message" maxlength="150" required></textarea>
+                    </div>
+                    <div id="form-datetime"> <!-- for reservation -->
+                        <label for="datetime">Insert date and time:</label>
+                        <input id="datetime" name="datetime" type="datetime-local" />
+                    </div>
+                    
+                    <input id="submit" type="submit" name="submit" value="Send">
+                </form>
+                
+            </section>
+            <script src="reserve.js"></script>
+{% endblock %}

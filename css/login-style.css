@@ -1,10 +1,11 @@
 /* Login page*/
+
 .login_cont{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("images/wavesOpacity.png");
+    background-image: url("../images/wavesOpacity.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -15,6 +16,7 @@
     background: black;
     border-radius: 8px;
     top: 40px;
+    animation: transitionIn 2s;
 }
 .box form{
     position: absolute;
@@ -113,5 +115,12 @@
 }
 .box form .inputBox input[type="submit"]:active{
     opacity: 0.8;
-
+}
+.error{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    font-size: 1em;
+    text-align: center;
 }

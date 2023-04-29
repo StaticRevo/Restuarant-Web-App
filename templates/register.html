@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="reg_cont">
+    <div class ="regbox">
+        <form id="registration-form" method="post" onsubmit="return checkPassword() && checkEmail();">
+            <h2>Register</h2>
+            <div class="inputBox">
+                <input type="text" name="name" required="required">
+                <span>Name</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="surname" required="required">
+                <span>Surname</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="email" id="emailInput" required="required">
+                <span>Email</span>
+                <i></i> 
+            </div>
+            <div class="inputBox">
+                <input type="password" name="password" id="password" required="required">
+                <span>Password</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="confirmPassword" id="confirmPassword"required="required">
+                <span>Confirm Password</span>
+                <i></i>
+            </div>
+            <script src="javascript/register.js"></script>
+            <input type="submit" value="Register">
+        </form>        
+    </div>
+</div>
+{% endblock %}

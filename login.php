@@ -1,53 +1,48 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Seaside Grill</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/login-style.css">
-    </head>
-    <body>
-        <header>
-            <a href="index.php"><img class="logo" src="images/logoNotext.png" alt="Logo"></a>
-            <nav>
-                <ul class = "nav_links">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="about.php">About</a></li>
-                    <li><a href="reserve.php">Reservation</a></li>
-                </ul>
-            </nav>
-            <div class = "main">
-                <a href="login.php" class="user"><i class="ri-user-fill"></i>Sign in</a>
-                <a href="register.php">Register</a>
-                <div class = "bx bx-menu" id="menu-icon"></div>
-            </div>
-        </header>
-        <div class="login_cont">
-            <div class ="box">
-                <form>
-                    <h2>Sign in</h2>
-                    <div class="inputBox">
-                        <input type="text" required="required">
-                        <span>Email</span>
-                        <i></i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" required="required">
-                        <span>Password</span>
-                        <i></i>
-                    </div>
-                    <div class="links">
-                        <a href="#">Forgot Password</a>
-                        <a href="#">Sign Up</a>
-                    </div>
-                    <input type="submit" value="Login">
-                </form>
-            </div>
-        </div>
-    </body>
-</html>
+    <?php
+    $error = null;
+    //This brings in a twig instance for use by this script
+    require_once __DIR__.'/bootstrap.php';
+    require_once __DIR__.'/database.php';
+
+    //Load from the DB
+    $db = new Db();
+
+    //Check if the login form has been submitted
+    if (isset($_POST['login'])) {
+        //Get the email and password from the form
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        //Check if the email exists in the database
+        $stmt = $db->prepare('SELECT * FROM Users WHERE email = ?');
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        if ($user) {
+            //Verify the password
+            if (password_verify($password, $user['password'])) {
+                //Successful login
+                session_start();
+                $_SESSION['user_id'] = $user['id'];
+                header('Location: /dashboard.php');
+                exit;
+            } else {
+                //Incorrect password
+                $error = 'Incorrect password';
+            }
+        } else {
+            //User not found
+            $error = 'Email not found';
+        }
+    }
+
+    // adds to the title tag
+    $title = "Login";
+        
+    // completes the CSS filename
+    $filename = "login";
+
+    // Render view
+    echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'error' => $error ?? null]);
