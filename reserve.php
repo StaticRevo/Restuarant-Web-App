@@ -13,7 +13,7 @@
     
 //    $db = new Db();
     
-    $validations = array();
+//    $validations = array();
 //    $formvalues = array();
     function validate($formvalues){
         // check name
@@ -37,10 +37,10 @@
         }
         
         // Check email field
-        if (!empty($_POST["email"])) {
-            $email = clean_input($_POST["email"]);
+        if (!empty($formvalues["email"])) {
+//            $email = clean_input($_POST["email"]); // already called function
             //FILTER_VALIDATE_EMAIL is one of many validation filters: https://www.php.net/manual/en/filter.filters.validate.php
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            if (!filter_var($formvalues["email"], FILTER_VALIDATE_EMAIL))
             {
                 $emailErr= 'You did not enter a valid email.';
                 $validations['emailError'] = $emailErr;
@@ -57,7 +57,7 @@
             if (!is_numeric($formvalues['mobile'])){
                 $validations['mobileError'] = 'You did not enter a number.';
             } else
-            if (($formvalues['mobile'] > 8)){
+            if ((strlen((string) ($formvalues['mobile'])) != 8)){ // on the assumption of acepting Maltese phone numbers only.
                 $validations['mobileError'] = 'You did not enter a valid mobile number.';
             }
         }
@@ -91,15 +91,15 @@
                 }
             } else {
                 // check datetime
-                if (!empty($_POST["datetime"])) {
+                if (!empty($formvalues["datetime"])) {
 
                 } else {
-                    $validations['datetime'] = "Date and time are required";
+                    $validations['datetimeError'] = "Date and time are required";
                 }
             }
         }
 
-        return $formvalues;
+        return [$formvalues,$validations];
     }
     
     
@@ -107,13 +107,14 @@
         // database has 2 tables: `forms-reservation` and `forms-contact`
         
         // common values
-        $genVar = $formvalues['name']           .",".
-                   $formvalues['surname']     .",".
-                   $formvalues['email']       .",".
+        $genVar = "'".$formvalues['name']."'"           .",".
+                   "'".$formvalues['surname']."'"     .",".
+                   "'{$formvalues['email']}'"       .",".
                    $formvalues['mobile']            ;
         
-        $genTableFields = "name,surname,email,`mobile-num`";
+        $genTableFields = "name,surname,email,mobile_num";
         // if reservation
+//        echo $formvalues['messageType']; // debug
         if ($formvalues['messageType'] === 'reservation'){
             $db = new Db();
             $db -> query("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
@@ -127,9 +128,10 @@
             
             $db = new Db();
             $db -> query("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
-                               $genVar .
-                           $formvalues['messageType']    .",".
-                           $formvalues['message']
+                               
+                           "'".$formvalues['messageType']."'"    .",".
+                           "'".$formvalues['message']."'"              .",".
+                          $genVar
                            .")");
         }
     }
@@ -137,7 +139,12 @@
     // $result = $db -> query("");
 
 
-
+    function setMessageTypeSelected($formvalues['messageType']){ // to render the webpage with the option the user previously selected.
+        $option = $formvalues['messageType'];
+//        $messageTypeSelected = ['','','']; // length 3, one for each form type.
+        $messageTypeSelected[$option] = 'selected="selected"';
+        return $messageTypeSelected;
+    }
 
     if(isset($_POST['submit'])) 
     {
@@ -149,7 +156,13 @@
             echo "This time is already booked."
         }*/
         
-        
+        $formvalues['name']           = ( $_POST['name']       );
+        $formvalues['surname']        = ( $_POST['surname']    );
+        $formvalues['email']          = ( $_POST['email']      );
+        $formvalues['mobile']         = ( $_POST['mobile']     );
+        $formvalues['datetime']       = ( $_POST['datetime']   );
+        $formvalues['messageType']    = ( $_POST['type']);
+        $formvalues['message']        = ( $_POST['message']    );
         
         $formvalues['name']           = clean_input( $_POST['name']       );
         $formvalues['surname']        = clean_input( $_POST['surname']    );
@@ -159,15 +172,29 @@
         $formvalues['messageType']    = clean_input( $_POST['type']);
         $formvalues['message']        = clean_input( $_POST['message']    );
         
-        $formvalues = validate($formvalues);
-        if (count($validations) === 0){
+        [$formvalues,$validations] = validate($formvalues);
+        
+//        echo count($validations); // debug
+        if (count($validations) == 0){
             execSQL($formvalues);
+            echo $twig->render(filename.".html", [
+                'form_status' => "Form has been submitted successfully.",
+                'title' => title, 'filename' => filename]);
+//            echo "Submitted successfully."; // to substitute with render webpage that successful submission.
         } else {
             // Render view with error messages
-            echo $twig->render(filename.".html", ['validations' => $validations, 'title' => title, 'filename' => filename]);
+            echo $twig->render(filename.".html", [
+                'form_status' => "Form submission is unsuccessful.",
+                'validations' => $validations,
+                'formvalues' => $formvalues,
+                'typeSelected' => $messageTypeSelected,
+                
+                'title' => title, 'filename' => filename]);
+            
+//            echo "unsuccessful.";
         }
     } else {
-        // Render view
+        // Render view for first time
         echo $twig->render(filename.".html", ['title' => title, 'filename' => filename]);
     }
 ?>
