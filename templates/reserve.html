@@ -23,28 +23,40 @@
 
 <!--                    <input class="btn" name="submit-reservation" type="submit" value="Book a reservation" />-->
 <!--                </form>-->
-                <span>{{ form_status }}</span>
+                
                 <form action="{{ filename }}.php" id="contact-form" method="post">
                     <h3>Contact Us or Book a Table</h3>
+                    {% if form_status is not empty %}
+                    <span id="form-status">{{ form_status }}</span>
+                    {% endif %}
                     
                     <div>
                         <label for="name">Name:</label>
+                        {% if validations.nameError is not empty %}
                         <span class="error">{{ validations.nameError }}</span>
+                        {% endif %}
                         <input name="name" value="{{ formvalues.name }}" required>
                     </div>
                     <div>
                         <label for="surname">Surname:</label>
+<!--                        twig check if variable is empty - https://stackoverflow.com/questions/22968427/check-if-string-variable-is-null-or-empty-or-full-of-white-spaces -->
+                        {% if validations.surnameError is not empty %}
                         <span class="error">{{ validations.surnameError }}</span>
+                        {% endif %}
                         <input name="surname" value="{{ formvalues.surname }}" required>
                     </div>
                     <div>
                         <label for="email">Email:</label>
+                        {% if validations.emailError is not empty %}
                         <span class="error">{{ validations.emailError }}</span>
+                        {% endif %}
                         <input name="email" type="email" value="{{ formvalues.email }}">
                     </div>
                     <div>
                         <label for="mobile">Mobile Number:</label>
+                        {% if validations.mobileError is not empty %}
                         <span class="error">{{ validations.mobileError }}</span>
+                        {% endif %}
                         <input name="mobile" type="tel" value="{{ formvalues.mobile }}" required>
                     </div>
                     
@@ -60,7 +72,9 @@
                     
                     <div id="form-message"> <!-- for contact -->
                         <label for="message">Message:</label>
+                        {% if validations.messageError is not empty %}
                         <span class="error">{{ validations.messageError }}</span>
+                        {% endif %}
                         <textarea name="message" maxlength="150" required>{{ formvalues.name }}</textarea>
                     </div>
                     <div id="form-datetime"> <!-- for reservation -->

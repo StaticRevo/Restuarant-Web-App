@@ -3,7 +3,6 @@ const message = document.getElementById("form-message");
 const datetime = document.getElementById("form-datetime");
 const submit = document.getElementById("submit");
 
-// addEventListener() - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
 selectElement.addEventListener("change", (event) => {
     if(event.target.value === "reservation"){
         message.style.display = "none";
@@ -16,3 +15,15 @@ selectElement.addEventListener("change", (event) => {
         submit.value = "Send";
     }
 });
+
+/*// onload event - https://www.w3schools.com/jsref/event_onload.asp
+window.onload = (event) => {
+    const spanElements = document.getElementsByTagName("span");
+    for (var spanElement of spanElements){
+        if (spanElement === ""){
+            spanElement.innerHTML.style.display = "none";
+        } else {
+            spanElement.innerHTML.style.display = "block";
+        }
+    }
+};*/

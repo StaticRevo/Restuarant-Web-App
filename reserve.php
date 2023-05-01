@@ -16,6 +16,8 @@
 //    $validations = array();
 //    $formvalues = array();
     function validate($formvalues){
+        $validations = []; // to make sure it is defined
+        
         // check name
         if (!empty($formvalues['name'])) {
             ;
@@ -104,7 +106,7 @@
     
     
     function execSQL($formvalues){
-        // database has 2 tables: `forms-reservation` and `forms-contact`
+        // database has 2 tables: `forms_reservation` and `forms_contact`
         
         // common values
         $genVar = "'".$formvalues['name']."'"           .",".
@@ -119,7 +121,8 @@
             $db = new Db();
             $db -> query("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
                                
-                           $formvalues['datetime'] .",".
+                      "STR_TO_DATE('{$formvalues["datetime"]}', '%Y-%m-%dT%H:%i')" .",".
+
                          $genVar
                            .")");
         }
@@ -139,15 +142,19 @@
     // $result = $db -> query("");
 
 
-    function setMessageTypeSelected($formvalues['messageType']){ // to render the webpage with the option the user previously selected.
-        $option = $formvalues['messageType'];
+    function setMessageTypeSelected($messageType){ // to render the webpage with the option the user previously selected.
+        
 //        $messageTypeSelected = ['','','']; // length 3, one for each form type.
-        $messageTypeSelected[$option] = 'selected="selected"';
+        $messageTypeSelected[$messageType] = 'selected="selected"';
         return $messageTypeSelected;
     }
 
+    
+
     if(isset($_POST['submit'])) 
     {
+        // unset() - https://stackoverflow.com/questions/8440030/php-remove-key-on-post  
+//        unset($_POST['submit']); // debug
         
         /*$datetime = $_POST['datetime']; //We need to sanitize this first (more on this soon)
         $result = $db -> select("SELECT datetime FROM reservations WHERE datetime=".$datetime);
@@ -156,13 +163,6 @@
             echo "This time is already booked."
         }*/
         
-        $formvalues['name']           = ( $_POST['name']       );
-        $formvalues['surname']        = ( $_POST['surname']    );
-        $formvalues['email']          = ( $_POST['email']      );
-        $formvalues['mobile']         = ( $_POST['mobile']     );
-        $formvalues['datetime']       = ( $_POST['datetime']   );
-        $formvalues['messageType']    = ( $_POST['type']);
-        $formvalues['message']        = ( $_POST['message']    );
         
         $formvalues['name']           = clean_input( $_POST['name']       );
         $formvalues['surname']        = clean_input( $_POST['surname']    );
@@ -175,6 +175,7 @@
         [$formvalues,$validations] = validate($formvalues);
         
 //        echo count($validations); // debug
+//        unset($_POST);
         if (count($validations) == 0){
             execSQL($formvalues);
             echo $twig->render(filename.".html", [
@@ -187,11 +188,12 @@
                 'form_status' => "Form submission is unsuccessful.",
                 'validations' => $validations,
                 'formvalues' => $formvalues,
-                'typeSelected' => $messageTypeSelected,
+                'typeSelected' => setMessageTypeSelected($formvalues['messageType']),
                 
                 'title' => title, 'filename' => filename]);
             
 //            echo "unsuccessful.";
+//            $validations=[]; // reset variable
         }
     } else {
         // Render view for first time
