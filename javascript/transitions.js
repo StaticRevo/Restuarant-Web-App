@@ -1,12 +1,11 @@
-function animateBoxes() {
-  const boxes = document.querySelectorAll('.box');
-  const windowHeight = window.innerHeight;
-  boxes.forEach(box => {
-    const boxTop = box.getBoundingClientRect().top;
-    if (boxTop < windowHeight) {
-      box.classList.add('animate');
+const observer = new IntersectionObserver((entries) =>{
+  entries.forEach((entry) =>{
+    console.log(entry)
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }else{
+      entry.target.classList.remove('show');
     }
-  });
-}
-animateBoxes();
-window.addEventListener('scroll', animateBoxes);
+  })
+});
+const hiddenElements = document.querySelectorAll('.hidden');
