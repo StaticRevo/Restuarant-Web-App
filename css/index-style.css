@@ -9,13 +9,13 @@ section {
     width: 100%;
     height: 100vh;
     scroll-snap-align: center;
-    animation: transitionInSections 2s;
 }
 section p {
-    font-size: 1.5rem;
-    max-width: 900px;
+    font-size: 1.6vw;
+    max-width: 60vw;
     position: relative;
     z-index: 1;
+    animation: transitionIn 2s;
 }
 #Home {
     position: relative;
@@ -38,10 +38,11 @@ section p {
     background-color: rgba(0, 0, 0, 0.1);
 }
 #Home h1 {
-    font-size: 4rem;
+    font-size: 4vw;
     font-weight: 1000;
     position: relative;
     z-index: 1;
+    animation: transitionIn 2s;
 }
 #About {
     position: relative;
@@ -62,16 +63,21 @@ section p {
     padding: 30px;
     border-radius: 20px;
     animation: transitionIn 2s;
+    transition: transform 0.3s ease-out;
 }
+.aboutBox:hover {
+    transform: scale(1.01);
+}
+
 .aboutBox h2 {
-    font-size: 3rem;
+    font-size: 3vw;
     font-weight: 1000;
     margin-right: 35px;
     margin-left: 8%;
     color: #FFFFFF;
 }
 .aboutBox p {
-    font-size: 2.5vh;
+    font-size: 1.3vw;
     width: 80%;
     margin-left: 10%;
     max-width: fit-content;
@@ -109,9 +115,8 @@ section p {
     padding-bottom: 80px;
 }
 #News h2 {
-    font-size: 50px;
+    font-size: 4.5vw;
     position: absolute;
-    left: 38%;
 }   
 .news-grid {
     display: grid;
@@ -126,6 +131,12 @@ section p {
     padding: 20px;
     width: 32vw;
     height: 80vh;
+    animation: transitionIn 2s;
+}
+.news-item:hover,
+.news-item2:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
 }
 .news-item {
     left: 0%;
@@ -141,21 +152,21 @@ section p {
 }
 .news-item h3,
 .news-item2 h3 {
-    font-size: 28px;
+    font-size: 4vh;
     margin-top: 0;
     font-weight: 500;
 }
 .news-item p,
 .news-item2 p {
-    font-size: 2.5vh;
-    margin-bottom: 0.5vh;
+    font-size: 1.2vw;
+    margin-bottom: 0.2vh;
 }
 .news-item img, 
 .news-item2 img {
-    width: 85%;
+    width: 25vw;
     height: auto;
     padding: 10px;
-    border-radius: 30%;
+    border-radius: 5%;
 }
 /* Overriding the footer with additional functionality*/
 footer{
@@ -168,11 +179,3 @@ footer{
     z-index: 2; 
     scroll-snap-align: center;
 }
-.hidden {
-    opacity: 1;
-    transition: all 1s;
-}
-.show {
-    opacity: 0;
-}
-    
