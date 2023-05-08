@@ -18,6 +18,7 @@ else
 }
 
 //Handle form submission
+$error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Get the user's information from the form
     $name = $_POST['name'];
@@ -25,10 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    //Insert the user's information into the database
-    $stmt = $db->prepare('INSERT INTO Users(name, surname, email, password) VALUES (?, ?, ?, ?)');
-    $stmt->bind_param('ssss', $name, $surname, $email, $password);
+    //Check if email already exists in database
+    $stmt = $db->prepare('SELECT COUNT(*) FROM Users WHERE email = ?');
+    $stmt->bind_param('s', $email);
     $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_array(MYSQLI_NUM);
+    $user_count = $row[0];
+    if ($user_count > 0) {
+        //Display error message
+        $error_message = "User already registered";
+    } else {
+        //Insert the user's information into the database
+        $stmt = $db->prepare('INSERT INTO Users(name, surname, email, password) VALUES (?, ?, ?, ?)');
+        $stmt->bind_param('ssss', $name, $surname, $email, $password);
+        $stmt->execute();
+    }
 }
 
 // adds to the title tag
@@ -38,4 +51,5 @@ $title = "Register";
 $filename = "register";
 
 // Render view
-echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
+echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'error_message' => $error_message]);
+
