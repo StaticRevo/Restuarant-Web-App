@@ -3,15 +3,18 @@
 {% block content %}
 <div class="login_cont">
     <div class ="box">
-        <form>
+        <form method="post">
             <h2>Sign in</h2>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
             <div class="inputBox">
-                <input type="text" required="required">
+                <input type="text" name="email" required="required">
                 <span>Email</span>
                 <i></i>
             </div>
             <div class="inputBox">
-                <input type="password" required="required">
+                <input type="password" name="password" required="required">
                 <span>Password</span>
                 <i></i>
             </div>
@@ -19,8 +22,9 @@
                 <a href="#">Forgot Password</a>
                 <a href="#">Sign Up</a>
             </div>
-            <input type="submit" value="Login">
+            <input type="submit" name="login" value="Login">
         </form>
     </div>
 </div>
+
 {% endblock %}
