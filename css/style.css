@@ -129,6 +129,21 @@ footer{
     display: flex; 
     z-index: 2; 
 }
+.col-1 h3, .col-2 h3, .col-3 h3 {
+    padding: 7px 15px;
+    background-color: rgba(0,136,169,1);
+    display: inline-block;
+    margin: 0;
+    border-radius: 50px;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+}
+.col-1 h3:hover, .col-2 h3:hover, .col-3 h3:hover {
+    background-color: rgba(0, 168, 204, 1);
+    color: #fff;
+}
+
 footer div{
     text-align: center;
 }
@@ -150,29 +165,18 @@ footer div h3{
 .col-1 a:hover{
     color: #0088a9;
 }
-form input{
-    width: 60%;
-    height: 35px;
-    border-radius: 4px;
-    text-align: center;
-    margin-top: 2%;
-    margin-bottom: 4%;
-    outline: none;
-    border: none;
-    font-size: 15px;
+.col-2 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-form button{
-    background-color: #0088a9;
-    border: 2px solid #0088a9;
-    color: #fff;
-    border-radius: 30px;
-    padding: 10px 30px;
-    font-size: 20px;
-    transition: all 0.3s ease;
+
+.col-2 ul li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 1.5;
 }
-form button:hover{
-    background-color: #006d8a;
-}
+
 .col-3 p{
     font-size: 20px;
 }
