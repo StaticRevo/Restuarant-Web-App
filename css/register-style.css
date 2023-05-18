@@ -9,14 +9,13 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  
 .regbox {
     position: relative;
     width: 380px;
     height: 600px;
     background: black;
     border-radius: 8px;
-    top: 40px;
+    margin-bottom: 5%;
     animation: transitionIn 2s;
   }
 .regbox form{
@@ -118,5 +117,12 @@
 .regbox form .inputBox input[type="submit"]:active{
     opacity: 0.8;
 }
-
+.error_message{
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    font-size: 1em;
+    text-align: center;
+}
   

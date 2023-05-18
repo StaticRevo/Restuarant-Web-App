@@ -15,7 +15,7 @@
     height: 420px;
     background: black;
     border-radius: 8px;
-    top: 40px;
+    margin-bottom: 5%;
     animation: transitionIn 2s;
 }
 .box form{

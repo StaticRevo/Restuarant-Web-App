@@ -1,0 +1,67 @@
+.menudetails {
+    padding-top: 150px;
+    padding-bottom: 130px;
+    background-image: url("../images/wavesOpacity.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-row h3 {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0;
+    text-shadow: black;
+  }
+  
+  .menu-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    border: 5px solid #ccc;
+    background-color: #29304B;
+    border-radius: 1em;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: transitionIn 2s;
+  }
+  
+  
+  .menu-item ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .menu-item li {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+.buttons a {
+    background-color: #0088a9;
+    border: 2px solid #0088a9;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 17px;
+    width: 47%;
+    text-align: center;
+  }
+  
+  .buttons a:first-child {
+    margin-right: 1%;
+  }
+  
+  .buttons a:last-child {
+    margin-left: 1%;
+  }

@@ -1,24 +1,65 @@
-/* Menu page*/
-
-.menublock{
-    margin-bottom: 0px;
+.menu {
+    padding-bottom: 50px;
+    background-image: url("../images/wavesOpacity.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.menu-item {
+
+.menu h1 {
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: black;
+}
+
+.menu-row {
     margin-bottom: 20px;
+}
+
+.menu-row h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0;
+    text-shadow: black;
+}
+
+.menu-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: calc(33.33% - 10px); 
+    margin-bottom: 20px;
+    border: 5px solid #ccc;
+    background-color: #29304B;
+    border-radius: 1em;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 2px 2px #ccc;
+    animation: transitionInSections 1s;
+    transition: transform 0.3s ease-out;
 }
 .menu-item h2 {
+    font-size: 20px;
     margin: 0;
-    font-size: 24px;
-    color: #333;
 }
 .menu-item p {
     margin: 0;
-    font-size: 16px;
-    color: #666;
+    line-height: 1.5;
+    font-weight: bold;
 }
-  
+.menu-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+.button {
+    background-color: #0088a9;
+    border: 2px solid #0088a9;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 17px;
+}
