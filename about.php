@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/bootstrap.php';
 require_once __DIR__.'/database.php';
+require_once 'gen-php/loginlogic.php';
 
 //Get db object
 $db = new Db();   
@@ -14,4 +15,4 @@ $title = "About";
 $filename = "about";
 
 // Render view
-echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
+echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'logged_in' => $_SESSION['logged_in']]);
