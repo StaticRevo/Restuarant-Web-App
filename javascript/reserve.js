@@ -15,15 +15,3 @@ selectElement.addEventListener("change", (event) => {
         submit.value = "Send";
     }
 });
-
-/*// onload event - https://www.w3schools.com/jsref/event_onload.asp
-window.onload = (event) => {
-    const spanElements = document.getElementsByTagName("span");
-    for (var spanElement of spanElements){
-        if (spanElement === ""){
-            spanElement.innerHTML.style.display = "none";
-        } else {
-            spanElement.innerHTML.style.display = "block";
-        }
-    }
-};*/
