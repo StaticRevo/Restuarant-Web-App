@@ -6,3 +6,6 @@ php_flag display_errors on
 </Files>
 
 Options -Indexes
+
+# display 404 page in case of 404 error - Page Not Found
+ErrorDocument 404 errors-http/404.php
