@@ -20,21 +20,14 @@ if ($is_id_set !== false)
             'type'              => $result[0]['type'],
             'name'              => $result[0]['name'],
             'ingredients'       => $result[0]['ingredients'],
+            'price'             => $result[0]['price'],
         ];
-        
-        $title = "Menu";
-    
-        $filename = "menu";
 
-        try {
-            echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
-        } catch (Exception $e) {
-            echo "An error occurred: " . $e->getMessage();
-        }
+    echo $twig->render('menu.html', ['menu' => $menu, 'filename' => 'menu']);
         
     }
  else 
-     echo $twig->render('404.html');
+ echo $twig->render('404.html', ['title' => '404', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
 }
 else 
- echo $twig->render('404.html');
+echo $twig->render('404.html', ['title' => '404', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);

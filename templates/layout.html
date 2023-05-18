@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Seaside Grill</title>
-        <meta name="description" content="">
+        <meta name="description" content="Discover our restaurant by the sea!">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9877e2c6ca.js" crossorigin="anonymous"></script>
-        <script src="../javascript/transitions.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/{{ filename }}-style.css">
+        <script type="text/javascript" src="javascript/header.js"></script> <!-- updated -->
     </head>
     <body>
         <!--<div class="transition transition is-active"></div>-->
@@ -25,16 +25,22 @@
                             <li><a href="reserve.php">Reservation</a></li>
                         </ul>
                     </nav>
-                    <div class = "main">
-                        {% if session.user_id is defined %}
-                        <a href="profile.php" class="user"><i class="ri-user-fill"></i>Profile</a>
+                    <div class="main">
+                        {% if logged_in %}
+                            <a href="profile.php" class="user"><i class="ri-user-fill"></i>Profile</a>
+                            <a href="gen-php/signout.php">Sign Out</a>
+                            <a href="favorites.php">Favourites</a>  
                         {% else %}
-                        <a href="login.php" class="user"><i class="ri-user-fill"></i>Sign in</a>
-                        <a href="register.php">Register</a>
+                            <a href="login.php" class="user"><i class="ri-user-fill"></i>Sign in</a>
+                            <a href="register.php">Register</a>
                         {% endif %}
                         <div class="bx bx-menu" id="menu-icon"></div>
                     </div>
+                    <nav>
+                        <img src="images/three-lines-header.png" onclick="arrangeSizeHeader()">
+                    </nav>
                 </header>
+                              
            
                 {% block content %}
                 {% endblock %}
@@ -46,13 +52,13 @@
                         <a href ="about.php">About</a>
                         <a href ="reserve.php">Reserve</a>
                     </div>
-                    <div class = "col-2">
-                        <h3>Newsletter</h3>
-                        <form>
-                            <input type="email" placeholder="Email Address" required> 
-                            <br>
-                            <button type="submit">Subscribe Now!</button>
-                        </form>
+                    <div class="col-2">
+                        <h3>Opening Hours</h3>
+                        <ul>
+                            <li>Monday - Friday: 9:00am - 10:00pm</li>
+                            <li>Saturday: 10:00am - 11:00pm</li>
+                            <li>Sunday: 10:00am - 9:00pm</li>
+                        </ul>
                     </div>
                     <div class = "col-3">
                         <h3>Contact</h3>
@@ -65,7 +71,5 @@
                     </div>
                 </footer>
             </div>
-        <!--</div>
-        <script src = "javascript/transitions.js"></script>-->
     </body>
 </html>
