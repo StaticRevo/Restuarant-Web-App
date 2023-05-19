@@ -79,7 +79,7 @@
         }
         
         if (!empty($formvalues['messageType'])) { // need messageType to work with it
-            if ($formvalues['messageType'] != 'Reservation'){
+            if ($formvalues['messageType'] != 'reservation'){
                 //Check message field   
                 if (!empty($formvalues['message'])) {
                     // $message = clean_input($_POST["message"]); // already called function
