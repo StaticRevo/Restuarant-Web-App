@@ -3,7 +3,7 @@ const message = document.getElementById("form-message");
 const datetime = document.getElementById("form-datetime");
 const submit = document.getElementById("submit");
 
-selectElement.addEventListener("change", (event) => {
+function changeForm(){
     if(event.target.value === "reservation"){
         message.style.display = "none";
         datetime.style.display = "flex";
@@ -14,4 +14,8 @@ selectElement.addEventListener("change", (event) => {
         datetime.style.display = "none";
         submit.value = "Send";
     }
+}
+selectElement.addEventListener("change", (event) => {
+    changeForm();
 });
+//window.onload = changeForm();
