@@ -1,23 +1,31 @@
-h2#pageTitle{
-    font-size: 1.5em;
-    margin-top: 200px;
-    text-align: center;
-    width: 100%;
+/* Reserve Page */
+
+h3{
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 1cap;
+    margin-bottom: 50px;
+    animation: transitionIn 2s;
 }
 div input, div select{
     width: 20em;
-    height: 35px;
+    height: 2.5em;
     border-radius: 4px;
     text-align: center;
-/*
-    margin-top: 2%;
-    margin-bottom: 4%;
-*/
+    align-content: center;
+    display: flex;
+    justify-content: center;
     outline: none;
     border: none;
     font-size: 15px;
 }
+div select {
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    padding: 0.5em;
+}
 form div {
+    animation: transitionIn 2s;
     margin: auto;
     display: flex;
 /*    flex-direction: row;*/
@@ -41,6 +49,7 @@ form textarea{
     outline: none;
     border: none;
     font-size: 15px;
+    
 }
 
 /*
@@ -68,38 +77,61 @@ body section form /*.btn*/ input[type="submit"] {
     cursor: pointer;
     transition: all 0.3s ease;
 /*    margin-top: 10px;*/
+
 }
 
 /*.btn*/input[type="submit"]:hover {
   background-color: #006d8a;
 }
-
-
 section {
     display: flex;
     flex-direction: row;
-/*    align-items: center;*/
+    align-items: center;
     justify-content: center;
     text-align: center;
+    align-items: center;
     width: 100%;
-/*    height: 100vh;*/
-   
+/*    margin-top: 100px;*/ /* updated */
+    background-image: url("../images/sunset2.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 section *{
     width: 70%;
+    display: flex;
+    flex-direction: column;
 }
 form{
-    margin: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-form * {
-    margin: 2em;
+form#form-main * {
+    margin: 1%;
     align-items: center;
+}
+span.error, span#form-status{
+    color: red;
+    margin-top: 0;
 }
 
 /* un/show particular elements */
 div#form-datetime{
     display: none;
+}
+.hidden{ /* by definition */
+    display: none;
+}
+.show{ /* by definition */
+    display: block;
+}
+footer{
+    bottom: 0;
+    width: 100%; 
+    padding: 20px 15%; 
+    background: #29304B; 
+    color: white;
+    display: flex; 
+    z-index: 2; 
+    position: relative;
 }

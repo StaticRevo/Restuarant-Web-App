@@ -1,16 +1,49 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="content">
+<div class="menu">
     <h1>Menu</h1>
-    <div class="menu">
-        {% for item in menu %}
-        <div class="menu-item">
-            <h2>{{ item.name }}</h2>
-            <p>Type: {{ item.type }}</p>
-            <p>Ingredients: {{ item.ingredients }}</p>
+    <div class="menu-row">
+        <h3>Starters</h3>
+        <div class="menu-column">
+            {% for item in menu %}
+                {% if item.type == 'Starter' %}
+                    <div class="menu-item">
+                        <h2>{{ item.name }}</h2>
+                        <p>€{{ item.price }}</p>
+                        <a href="menudetails.php?id={{ item.id }}" class="button">Read More</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
+    </div>
+    <div class="menu-row">
+        <h3>Main Course</h3>
+        <div class="menu-column">
+            {% for item in menu %}
+                {% if item.type == 'Main' %}
+                    <div class="menu-item">
+                        <h2>{{ item.name }}</h2>
+                        <p>€{{ item.price }}</p>
+                        <a href="menudetails.php?id={{ item.id }}" class="button">Read More</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="menu-row">
+        <h3>Desserts</h3>
+        <div class="menu-column">
+            {% for item in menu %}
+                {% if item.type == 'Dessert' %}
+                    <div class="menu-item">
+                        <h2>{{ item.name }}</h2>
+                        <p>€{{ item.price }}</p>
+                        <a href="menudetails.php?id={{ item.id }}" class="button">Read More</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

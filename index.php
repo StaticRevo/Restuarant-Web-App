@@ -3,6 +3,7 @@
 //This brings in a twig instance for use by this script
 require_once __DIR__.'/bootstrap.php';
 require_once __DIR__.'/database.php';
+require_once 'gen-php/loginlogic.php';
 
 //Check if we need to filter
 if(isset($_GET['type'])) 
@@ -23,7 +24,9 @@ $title = "Home";
 $filename = "index";
 
 // Render view
-echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename]);
+echo $twig->render($filename . '.html', [
+    'title' => $title, 
+    'filename' => $filename, 
+    'logged_in' => $_SESSION['logged_in']
+]);
 //echo $twig->render("index.html");
-
-?>
