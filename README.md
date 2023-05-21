@@ -6,3 +6,6 @@ This repository contains the code and documentation to the Restaurant Website th
 **Luca Gatt: **     About Page, Reservation Page (with database tables for forms)
 
 **Kayla Formosa: **
+
+## Important Notes:
+- `.htaccess` does not support relative paths. So, path to enter in statement cannot be known cross-platform. Tester to adjust path to [404.php](404.php) in the htaccess `ErrorDocument 404` statement.
