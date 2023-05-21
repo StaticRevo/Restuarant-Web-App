@@ -16,7 +16,7 @@
     
 //    $validations = array();
 //    $formvalues = array();
-    function validate($formvalues){
+    function validate($formvalues){ // Citation: validations got from lecture resources (Shelter example)
         $validations = []; // to make sure it is defined
         
         // check name
