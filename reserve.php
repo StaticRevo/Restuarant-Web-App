@@ -79,7 +79,7 @@
         }
         
         if (!empty($formvalues['messageType'])) { // need messageType to work with it
-            if ($formvalues['messageType'] != 'Reservation'){
+            if ($formvalues['messageType'] != 'reservation'){
                 //Check message field   
                 if (!empty($formvalues['message'])) {
                     // $message = clean_input($_POST["message"]); // already called function
@@ -179,6 +179,35 @@
 //        unset($_POST);
         if (count($validations) == 0){
             execSQL($formvalues);
+            
+            // mail
+            try {
+                // email to notify customer care
+                $mail->addAddress('customercare@seasidegrill.mt');     //Add a recipient
+                //$mail->addAddress($formvalues['email']); // send email to submitter with form copy
+                $mail->Subject = "{$formvalues['messageType'] } Form Submission";
+                $emailMsg =
+                    "Name:\t"           .$formvalues['name']         .
+                    "\nSurname:\t"        .$formvalues['surname']      .
+                    "\nEmail:\t"          .$formvalues['email']        .
+                    "\nMobile:\t"         .$formvalues['mobile']       .
+                    "\nMessage Type:\t"   .$formvalues['messageType']  
+                ;
+                if (($formvalues['messageType'] == 'question') or ($formvalues['messageType'] == 'complaint')){
+                    $emailMsg .= "\nMessage:\n".$formvalues['message'];
+                }elseif ($formvalues['messageType'] == 'reservation'){
+                    $emailMsg .= "\nDate and Time:\t"  .$formvalues['datetime'];
+                }
+                $mail->isHTML(false);
+                $mail->Body    = $emailMsg;
+                //$mail->AltBody = $emailMsg; // if HTML does not work. In this case, no HTML is needed.
+
+                $mail->send();
+                //echo "<script>alert('Automated email has been sent');</script>";
+            } catch (Exception $e) {
+                echo "<script>alert('Automated email could not be sent. Mailer Error: {$mail->ErrorInfo}');</script>";
+            }
+            
             echo $twig->render(filename.".html", [
                 'form_status' => "Form has been submitted successfully.",
                 'title' => title, 'filename' => filename]);
