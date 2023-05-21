@@ -13,10 +13,10 @@ if ($menuId !== false) {
         $menu = $menu[0];
         echo $twig->render('menudetails.html', ['menu' => $menu, 'filename' => 'menudetails']);
     } else {
-        echo $twig->render('404.html', ['title' => '404', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
+        echo $twig->render('404.html', ['title' => 'Page not Found', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
 
     }
 } else {
-    echo $twig->render('404.html', ['title' => '404', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
+    echo $twig->render('404.html', ['title' => 'Page not Found', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
 
 }
