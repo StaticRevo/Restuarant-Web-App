@@ -21,10 +21,12 @@ else
 $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Get the user's information from the form
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $name       = clean_input( $_POST['name']       );
+    $surname    = clean_input( $_POST['surname']    );
+    $email      = clean_input( $_POST['email']      );
+    $password   = clean_input( $_POST['password']   );
+    
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     //Check if email already exists in database
     $stmt = $db->prepare('SELECT COUNT(*) FROM users WHERE email = ?');
