@@ -61,7 +61,7 @@
                 $validations['mobileError'] = 'You did not enter a number.';
             } else
             if ((strlen((string) ($formvalues['mobile'])) != 8)){ // on the assumption of acepting Maltese phone numbers only.
-                $validations['mobileError'] = 'You did not enter a valid mobile number.';
+                $validations['mobileError'] = 'You did not enter a valid Malta mobile number (consisting of 8 digits).';
             }
         }
         else
