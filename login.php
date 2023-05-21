@@ -15,8 +15,8 @@ $db = new Db();
 // Check if the login form has been submitted
 if (isset($_POST['email'], $_POST['password'], $_POST['login'])) {
     // Get the email and password from the form
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = clean_input( $_POST['email'] );
+    $password = clean_input( $_POST['password'] );
 
     // Check if the email exists in the database
     $stmt = $db->prepare('SELECT * FROM Users WHERE email = ?');
