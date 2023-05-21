@@ -11,7 +11,7 @@ $db = new Db();
 $user_id = $_SESSION['user_id'];
 
 //Fetch user data from the DB
-$stmt = $db->prepare('SELECT Name, Surname, Email FROM Users WHERE user_id = ?');
+$stmt = $db->prepare('SELECT Name, Surname, Email, user_id FROM Users WHERE user_id = ?');
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();

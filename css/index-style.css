@@ -180,3 +180,29 @@ footer{
     z-index: 2; 
     scroll-snap-align: center;
 }
+@media only screen and (max-width: 768px) {
+    section#Home h1{
+        font-size: 7vw;
+    }
+    section#Home p{
+        font-size: 3vw;
+    }
+    section#About,
+    section .aboutBox {
+        flex-direction: column;
+    }
+    section {
+        height: 90%;
+        max-height: none;
+    }
+    section,
+    footer {
+        scroll-snap-align: none;
+    }
+    section#News,
+    section .news-item,
+    section .news-item2 {
+        flex-direction: column;
+        max-height: 20em;
+    }
+}
