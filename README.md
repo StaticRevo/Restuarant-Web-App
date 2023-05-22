@@ -16,4 +16,4 @@ Disclaimer: Accurate information about team responsibilities and participation c
    3. Copy the username and password (with the single quotes) in [config.ini](config.ini) under `[mailer]` section, where specified.
   
   Note that this Mailer does not send to the specified recipients, but is used to test the email transactions.
-- `.htaccess` does not support relative paths. So, path to enter in statement cannot be known cross-platform. Tester to adjust path to [404.php](404.php) in the htaccess `ErrorDocument 404` statement.
+- [.htaccess](.htaccess) does not support relative paths. So, path to enter in statement cannot be known cross-platform. Tester to adjust path to [404.php](404.php) in the htaccess `ErrorDocument 404` statement. Replace `path-inside-htdocs` with the path to file, starting frmo the folder inside `htdocs` (the root folder). For example, if [404.php](404.php) is directly under the root folder then `path-inside-htdocs` should be removed without entering anything else. The folder and path would be simply `/404.php`.
