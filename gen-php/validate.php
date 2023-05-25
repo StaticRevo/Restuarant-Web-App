@@ -11,7 +11,7 @@
             $validations['nameError'] = $nameErr;
         }
         
-        return $formvalues, $validations;
+        return [$formvalues, $validations];
     }
     function validateSurname($formvalues, $validations){
         // check surname
@@ -24,7 +24,7 @@
             $validations['surnameError'] = $surnameErr;
         }
         
-        return $formvalues, $validations;
+        return [$formvalues, $validations];
     }
     function validateEmail($formvalues, $validations){
         // Check email field
@@ -43,7 +43,7 @@
             $validations['emailError'] = $emailErr;
         }
         
-        return $formvalues, $validations;
+        return [$formvalues, $validations];
     }
     function validateMobile($formvalues, $validations){
         // check mobile
@@ -60,7 +60,7 @@
             $validations['mobileError'] = "Mobile is required";
         }
         
-        return $formvalues, $validations;
+        return [$formvalues, $validations];
     }
     
 ?>
