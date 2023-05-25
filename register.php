@@ -21,10 +21,10 @@ else
 $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Get the user's information from the form
-    $name       = clean_input( $_POST['name']       );
-    $surname    = clean_input( $_POST['surname']    );
-    $email      = clean_input( $_POST['email']      );
-    $password   = clean_input( $_POST['password']   );
+    $name       = $db -> quote( clean_input( $_POST['name']       ) );
+    $surname    = $db -> quote( clean_input( $_POST['surname']    ) );
+    $email      = $db -> quote( clean_input( $_POST['email']      ) );
+    $password   = $db -> quote( clean_input( $_POST['password']   ) );
     
     // @LucaGatt22
     // preparing required variables for validation
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (count($validations) == 0){ // prevent further execution if validation errors occur
         //Check if email already exists in database
-        $stmt = $db->prepare(quote('SELECT COUNT(*) FROM users WHERE email = ?'));
+        $stmt = $db->prepare('SELECT COUNT(*) FROM users WHERE email = ?');
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_message = "User already registered";
         } else {
             //Insert the user's information into the database
-            $stmt = $db->prepare(quote('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)'));
+            $stmt = $db->prepare('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)');
             $stmt->bind_param('ssss', $name, $surname, $email, $password);
             $stmt->execute();
             header('Location: login.php');
