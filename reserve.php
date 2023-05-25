@@ -20,10 +20,10 @@
     function validate($formvalues){ // Citation: validations got from lecture resources (Shelter example)
         $validations = []; // to make sure it is defined
         
-        $formvalues, $validations = validateName($formvalues, $validations);
-        $formvalues, $validations = validateSurname($formvalues, $validations);
-        $formvalues, $validations = validateEmail($formvalues, $validations);
-        $formvalues, $validations = validateMobile($formvalues, $validations);
+        [$formvalues, $validations] = validateName($formvalues, $validations);
+        [$formvalues, $validations] = validateSurname($formvalues, $validations);
+        [$formvalues, $validations] = validateEmail($formvalues, $validations);
+        [$formvalues, $validations] = validateMobile($formvalues, $validations);
         
         
         
