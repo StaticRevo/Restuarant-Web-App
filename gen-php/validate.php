@@ -62,5 +62,18 @@
         
         return [$formvalues, $validations];
     }
-    
+    function validateString($formvalues, $validations, $varName){ // generic function to a validate (check if set) a string, since it is required
+        if (!empty($formvalues[$varName])) {
+            ;
+        }
+        else
+        {
+            $err = "This field is required";
+            
+            $tmp = $varName.'Error';
+            $validations[$tmp] = $err;
+        }
+        
+        return [$formvalues, $validations];
+    }
 ?>
