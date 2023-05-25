@@ -79,23 +79,23 @@
 //        echo $formvalues['messageType']; // debug
         if ($formvalues['messageType'] === 'reservation'){
             $db = new Db();
-            $db -> query("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
+            $db -> query(quote("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
                                
                       "STR_TO_DATE('{$formvalues["datetime"]}', '%Y-%m-%dT%H:%i')" .",".
 
                          $genVar
-                           .")");
+                           .")"));
         }
         // if message
         else{
             
             $db = new Db();
-            $db -> query("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
+            $db -> query(quote("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
                                
                            "'".$formvalues['messageType']."'"    .",".
                            "'".$formvalues['message']."'"              .",".
                           $genVar
-                           .")");
+                           .")"));
         }
     }
     
