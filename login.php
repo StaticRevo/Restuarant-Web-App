@@ -15,8 +15,8 @@ $db = new Db();
 // Check if the login form has been submitted
 if (isset($_POST['email'], $_POST['password'], $_POST['login'])) {
     // Get the email and password from the form
-    $email = clean_input( $_POST['email'] );
-    $password = clean_input( $_POST['password'] );
+    $email = $db -> quote( clean_input( $_POST['email'] ) ); // quote() and clean_input() functions against threats SQL injection
+    $password = $db -> quote( clean_input( $_POST['password'] ) );
     
     // preparing variables for validate functions
     $formvalues['email'] = $email;
@@ -32,7 +32,7 @@ if (isset($_POST['email'], $_POST['password'], $_POST['login'])) {
     $password = $formvalues['password'];
     
     // Check if the email exists in the database
-    $stmt = $db->prepare(quote('SELECT * FROM Users WHERE email = ?'));
+    $stmt = $db->prepare('SELECT * FROM Users WHERE email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
