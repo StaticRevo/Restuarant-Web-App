@@ -48,23 +48,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    //Check if email already exists in database
-    $stmt = $db->prepare(quote('SELECT COUNT(*) FROM users WHERE email = ?'));
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_array(MYSQLI_NUM);
-    $user_count = $row[0];
-    if ($user_count > 0) {
-        //Display error message
-        $error_message = "User already registered";
-    } else {
-        //Insert the user's information into the database
-        $stmt = $db->prepare(quote('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)'));
-        $stmt->bind_param('ssss', $name, $surname, $email, $password);
+    if (count($validations) == 0){ // prevent further execution if validation errors occur
+        //Check if email already exists in database
+        $stmt = $db->prepare(quote('SELECT COUNT(*) FROM users WHERE email = ?'));
+        $stmt->bind_param('s', $email);
         $stmt->execute();
-        header('Location: login.php');
-        
+        $result = $stmt->get_result();
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $user_count = $row[0];
+        if ($user_count > 0) {
+            //Display error message
+            $error_message = "User already registered";
+        } else {
+            //Insert the user's information into the database
+            $stmt = $db->prepare(quote('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)'));
+            $stmt->bind_param('ssss', $name, $surname, $email, $password);
+            $stmt->execute();
+            header('Location: login.php');
+
+        }
     }
 }
 
@@ -75,5 +77,5 @@ $title = "Register";
 $filename = "register";
 
 // Render view
-echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'error_message' => $error_message]);
+echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'error_message' => $error_message, 'validations' => $validations]);
 
