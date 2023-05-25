@@ -30,7 +30,7 @@ if(isset($_POST['submit-favourites'])){
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     } else { // if email is not valid
-        echo "Message could not be sent. Error: {$validations['emailErr']}";
+        echo "Message could not be sent. Error: {$validations['emailError']}";
     }
     unset($_POST);
 }
