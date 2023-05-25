@@ -26,6 +26,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email      = clean_input( $_POST['email']      );
     $password   = clean_input( $_POST['password']   );
     
+    // @LucaGatt22
+    // preparing required variables for validation
+    $formvalues['name'] = $name;
+    $formvalues['surname'] = $surname;
+    $formvalues['email'] = $email;
+    $formvalues['password'] = $password;
+    $validations = [];
+    
+    // validate
+    [$formvalues, $validations] = validateName($formvalues, $validations);
+    [$formvalues, $validations] = validateSurname($formvalues, $validations);
+    [$formvalues, $validations] = validateEmail($formvalues, $validations);
+    [$formvalues, $validations] = validateString($formvalues, $validations, 'password');
+    
+    // update variables for continuation of script
+    $name = $formvalues['name'];
+    $surname = $formvalues['surname'];
+    $email = $formvalues['email'];
+    $password = $formvalues['password'];
+    
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //Check if email already exists in database
