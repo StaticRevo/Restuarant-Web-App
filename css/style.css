@@ -119,6 +119,12 @@ header{
     margin: 0.5em;
     display: none; /* unneeded on screen full-size*/
 }
+
+/* main */
+.error{
+    color: red;
+}
+
 footer{
     bottom: 0;
     width: 100%; 

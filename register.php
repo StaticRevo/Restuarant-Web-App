@@ -3,6 +3,8 @@
 //This brings in a twig instance for use by this script
 require_once __DIR__.'/bootstrap.php';
 require_once __DIR__.'/database.php';
+require_once 'gen-php/clean_input.php';
+require_once 'gen-php/validate.php';
 
 //Load from the DB
 $db = new Db();
@@ -19,12 +21,14 @@ else
 
 //Handle form submission
 $error_message = '';
+$validations = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Get the user's information from the form
     $name       = $db -> quote( clean_input( $_POST['name']       ) );
     $surname    = $db -> quote( clean_input( $_POST['surname']    ) );
     $email      = $db -> quote( clean_input( $_POST['email']      ) );
     $password   = $db -> quote( clean_input( $_POST['password']   ) );
+    $confirmPassword   = $db -> quote( clean_input( $_POST['confirmPassword']   ) );
     
     // @LucaGatt22
     // preparing required variables for validation
@@ -32,13 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formvalues['surname'] = $surname;
     $formvalues['email'] = $email;
     $formvalues['password'] = $password;
-    $validations = [];
     
     // validate
     [$formvalues, $validations] = validateName($formvalues, $validations);
     [$formvalues, $validations] = validateSurname($formvalues, $validations);
     [$formvalues, $validations] = validateEmail($formvalues, $validations);
     [$formvalues, $validations] = validateString($formvalues, $validations, 'password');
+    if ($password == $confirmPassword){
+        ;
+    } else {
+        $validation['confirmPasswordError'] = 'Password does not match.';
+    }
     
     // update variables for continuation of script
     $name = $formvalues['name'];

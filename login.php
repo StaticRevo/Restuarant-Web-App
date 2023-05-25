@@ -8,6 +8,8 @@ $error = null;
 //This brings in a twig instance for use by this script
 require_once __DIR__.'/bootstrap.php';
 require_once __DIR__.'/database.php';
+require_once 'gen-php/clean_input.php';
+require_once 'gen-php/validate.php';
 
 // Load from the DB
 $db = new Db();

@@ -8,11 +8,18 @@
             {% if error %}
             <div class="error">{{ error }}</div>
             {% endif %}
+            
+            {% if validations.emailError is not empty %}
+            <span class="error">{{ validations.emailError }}</span>
+            {% endif %}
             <div class="inputBox">
                 <input type="text" name="email" required="required">
                 <span>Email</span>
                 <i></i>
             </div>
+            {% if validations.passwordError is not empty %}
+            <span class="error">{{ validations.passwordError }}</span> <!-- required -->
+            {% endif %}
             <div class="inputBox">
                 <input type="password" name="password" required="required">
                 <span>Password</span>
