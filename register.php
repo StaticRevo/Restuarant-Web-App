@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //Check if email already exists in database
-    $stmt = $db->prepare('SELECT COUNT(*) FROM users WHERE email = ?');
+    $stmt = $db->prepare(quote('SELECT COUNT(*) FROM users WHERE email = ?'));
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = "User already registered";
     } else {
         //Insert the user's information into the database
-        $stmt = $db->prepare('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)');
+        $stmt = $db->prepare(quote('INSERT INTO users(name, surname, email, password) VALUES (?, ?, ?, ?)'));
         $stmt->bind_param('ssss', $name, $surname, $email, $password);
         $stmt->execute();
         header('Location: login.php');
