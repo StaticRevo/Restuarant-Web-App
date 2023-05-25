@@ -79,23 +79,23 @@
 //        echo $formvalues['messageType']; // debug
         if ($formvalues['messageType'] === 'reservation'){
             $db = new Db();
-            $db -> query($db -> quote("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
+            $db -> query("INSERT INTO forms_reservation(reservation_date,{$genTableFields}) VALUES (" .
                                
                       "STR_TO_DATE('{$formvalues["datetime"]}', '%Y-%m-%dT%H:%i')" .",".
 
                          $genVar
-                           .")"));
+                           .")");
         }
         // if message
         else{
             
             $db = new Db();
-            $db -> query($db -> quote("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
+            $db -> query("INSERT INTO forms_contact(message_type,message,{$genTableFields}) VALUES (" .
                                
                            "'".$formvalues['messageType']."'"    .",".
                            "'".$formvalues['message']."'"              .",".
                           $genVar
-                           .")"));
+                           .")");
         }
     }
     
@@ -123,14 +123,14 @@
             echo "This time is already booked."
         }*/
         
-        
-        $formvalues['name']           = clean_input( $_POST['name']       );
-        $formvalues['surname']        = clean_input( $_POST['surname']    );
-        $formvalues['email']          = clean_input( $_POST['email']      );
-        $formvalues['mobile']         = clean_input( $_POST['mobile']     );
-        $formvalues['datetime']       = clean_input( $_POST['datetime']   );
-        $formvalues['messageType']    = clean_input( $_POST['type']);
-        $formvalues['message']        = clean_input( $_POST['message']    );
+        $db = new Db();
+        $formvalues['name']           = $db -> quote( clean_input( $_POST['name']       ) );
+        $formvalues['surname']        = $db -> quote( clean_input( $_POST['surname']    ) );
+        $formvalues['email']          = $db -> quote( clean_input( $_POST['email']      ) );
+        $formvalues['mobile']         = $db -> quote( clean_input( $_POST['mobile']     ) );
+        $formvalues['datetime']       = $db -> quote( clean_input( $_POST['datetime']   ) );
+        $formvalues['messageType']    = $db -> quote( clean_input( $_POST['type']       ) );
+        $formvalues['message']        = $db -> quote( clean_input( $_POST['message']    ) );
         
         [$formvalues,$validations] = validate($formvalues);
         
