@@ -4,6 +4,7 @@
     require_once __DIR__.'/database.php';
     require_once __DIR__.'/gen-php/clean_input.php';
     require_once 'gen-php/loginlogic.php';
+    require_once 'gen-php/validate.php';
 
     
     // adds to the title tag
@@ -19,55 +20,12 @@
     function validate($formvalues){ // Citation: validations got from lecture resources (Shelter example)
         $validations = []; // to make sure it is defined
         
-        // check name
-        if (!empty($formvalues['name'])) {
-            ;
-        }
-        else
-        {
-            $nameErr = "Name is required";
-            $validations['nameError'] = $nameErr;
-        }
+        $formvalues, $validations = validateName($formvalues, $validations);
+        $formvalues, $validations = validateSurname($formvalues, $validations);
+        $formvalues, $validations = validateEmail($formvalues, $validations);
+        $formvalues, $validations = validateMobile($formvalues, $validations);
         
-        // check surname
-        if (!empty($formvalues['surname'])) {
-            ;
-        }
-        else
-        {
-            $surnameErr = "Surname is required";
-            $validations['surnameError'] = $surnameErr;
-        }
         
-        // Check email field
-        if (!empty($formvalues["email"])) {
-//            $email = clean_input($_POST["email"]); // already called function
-            //FILTER_VALIDATE_EMAIL is one of many validation filters: https://www.php.net/manual/en/filter.filters.validate.php
-            if (!filter_var($formvalues["email"], FILTER_VALIDATE_EMAIL))
-            {
-                $emailErr= 'You did not enter a valid email.';
-                $validations['emailError'] = $emailErr;
-            }
-        }
-        else
-        {
-            $emailErr = "Email is required";
-            $validations['emailError'] = $emailErr;
-        }
-        
-        // check mobile
-        if (!empty($formvalues['mobile'])) {
-            if (!is_numeric($formvalues['mobile'])){
-                $validations['mobileError'] = 'You did not enter a number.';
-            } else
-            if ((strlen((string) ($formvalues['mobile'])) != 8)){ // on the assumption of acepting Maltese phone numbers only.
-                $validations['mobileError'] = 'You did not enter a valid Malta mobile number (consisting of 8 digits).';
-            }
-        }
-        else
-        {
-            $validations['mobileError'] = "Mobile is required";
-        }
         
         // check messageType - should not need checking since cannot be blank.
         if (!empty($formvalues['messageType'])) {
@@ -78,6 +36,7 @@
             $validations['typeError'] = "Message type is required";
         }
         
+        // check message. Message is different accoring to `messageType`
         if (!empty($formvalues['messageType'])) { // need messageType to work with it
             if ($formvalues['messageType'] != 'reservation'){
                 //Check message field   
