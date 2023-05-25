@@ -5,24 +5,32 @@ require_once __DIR__.'/bootstrap.php';
 require_once __DIR__.'/database.php';
 //require_once __DIR__.'/menu.php';
 require_once __DIR__.'/gen-php/loginlogic.php';
-
+require_once 'gen-php/clean_input.php';
+require_once 'gen-php/validate.php';
 
 
 
 /*updated*/
 if(isset($_POST['submit-favourites'])){
-    // PHPMailer - used their github repository as guide
+    $formvalues['email'] = clean_input($_POST['email']);
+    [$formvalues, $validations] = validateEmail($formvalues, $validations);
     
-    try {
-        $mail->addAddress($_POST['email']);     //Add a recipient
-        $mail->Subject = 'Here are your favourite dishes from Seaside Grill!';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b><span>Put favourites here</span>';
-        $mail->AltBody = 'HTML is not supported.';
-        
-        $mail->send();
-        echo 'Message has been sent';
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    if (count(validations) == 0){ // if email is valid
+        // PHPMailer - used their github repository as guide
+        try {
+
+            $mail->addAddress($formvalues['email']);     //Add a recipient
+            $mail->Subject = 'Here are your favourite dishes from Seaside Grill!';
+            $mail->Body    = 'This is the HTML message body <b>in bold!</b><span>Put favourites here</span>';
+            $mail->AltBody = 'HTML is not supported.';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    } else { // if email is not valid
+        echo "Message could not be sent. Error: {$validations['emailError']}";
     }
     unset($_POST);
 }
