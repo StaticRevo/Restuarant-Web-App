@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    - {{menu.name}}
+{% endblock %}
+
+{% block menu %}
+    {% include 'menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class = "menudetails">
+    <div class = "menu-row">
+        <h3>{{ menu.name }}</h3>
+    </div>
+    <div class = "menu-item">
+        <ul>
+            <li>Type: {{ menu.type }}</li>
+            <li>Ingredients: {{ menu.ingredients }}</li>
+            <li>Price: €{{ menu.price }}</li>
+            <div class = "buttons">
+                <a href = "favourites.php?id={{ menu.id }}" class="button">Add to Favorites</a>
+                <a href = "menu.php" class="button">Back</a>
+            </div>
+        </ul>
+    </div>
+</div>
+{% endblock %}

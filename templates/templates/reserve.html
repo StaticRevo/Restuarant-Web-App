@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+            
+            <section>
+                <form action="{{ filename }}.php" id="form-main" method="post">
+                    <h3>Contact Us or Book a Table</h3>
+                    {% if form_status is not empty %}
+                    <span id="form-status">{{ form_status }}</span>
+                    {% endif %}
+                    
+                    <div>
+                        <label for="name">Name:</label>
+                        {% if validations.nameError is not empty %}
+                        <span class="error">{{ validations.nameError }}</span>
+                        {% endif %}
+                        <input name="name" value="{{ formvalues.name }}" required>
+                    </div>
+                    <div>
+                        <label for="surname">Surname:</label>
+<!--                        twig check if variable is empty - https://stackoverflow.com/questions/22968427/check-if-string-variable-is-null-or-empty-or-full-of-white-spaces -->
+                        {% if validations.surnameError is not empty %}
+                        <span class="error">{{ validations.surnameError }}</span>
+                        {% endif %}
+                        <input name="surname" value="{{ formvalues.surname }}" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        {% if validations.emailError is not empty %}
+                        <span class="error">{{ validations.emailError }}</span>
+                        {% endif %}
+                        <input name="email" type="email" value="{{ formvalues.email }}">
+                    </div>
+                    <div>
+                        <label for="mobile">Mobile Number:</label>
+                        {% if validations.mobileError is not empty %}
+                        <span class="error">{{ validations.mobileError }}</span>
+                        {% endif %}
+                        <input name="mobile" type="tel" value="{{ formvalues.mobile }}" required>
+                    </div>
+                    
+                    <div>
+                        <label for="type">Message Type:</label>
+                        <select name="type" id="dropdown-form" name="dropdown-form" required>
+<!--                            Set the default option - https://stackoverflow.com/questions/5212939/how-do-i-set-an-un-selectable-default-description-in-a-select-drop-down-menu-i -->
+                            <option value="question" {{ typeSelected.question }}>Question</option>
+                            <option value="complaint" {{ typeSelected.complaint }}>Complaint</option>
+                            <option value="reservation" {{ typeSelected.reservation }}>Reservation</option>
+                        </select>
+                    </div>
+                    
+                    <div id="form-message"> <!-- for contact -->
+                        <label for="message">Message:</label>
+                        {% if validations.messageError is not empty %}
+                        <span class="error">{{ validations.messageError }}</span>
+                        {% endif %}
+                        <textarea name="message" maxlength="150">{{ formvalues.name }}</textarea>
+                    </div>
+                    <div id="form-datetime"> <!-- for reservation -->
+                        <label for="datetime">Insert date and time:</label>
+                        <span class="error">{{ validations.datetimeError }}</span>
+                        <input id="datetime" name="datetime" type="datetime-local" value="{{ formvalues.datetime }}"/>
+                    </div>
+                    
+                    <input id="submit" type="submit" name="submit" value="Send">
+                </form>
+                
+            </section>
+            <script src="javascript/reserve.js"></script>
+{% endblock %}

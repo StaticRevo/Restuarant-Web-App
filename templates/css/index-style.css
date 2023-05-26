@@ -1,0 +1,208 @@
+/* Home Page */
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: center;
+}
+section p {
+    font-size: 2vw;
+    max-width: 60vw;
+    position: relative;
+    z-index: 1;
+    animation: transitionIn 2s;
+}
+#Home {
+    position: relative;
+    background-image: url(../images/restaurant.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: grid;
+    place-items: center;
+    align-content: center;
+}
+#Home::before { 
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#Home h1 {
+    font-size: 4vw;
+    font-weight: 1000;
+    position: relative;
+    z-index: 1;
+    animation: transitionIn 2s;
+}
+#About {
+    position: relative;
+    background-image: url(../images/wavesOpacity.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.aboutBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2%;
+    margin-top: 8%;
+    max-width: 85vw;
+    background-color: #29304B;
+    padding: 30px;
+    border-radius: 20px;
+    animation: transitionIn 2s;
+    transition: transform 0.3s ease-out;
+}
+.aboutBox:hover {
+    transform: scale(1.01);
+}
+
+.aboutBox h2 {
+    font-size: 3vw;
+    font-weight: 1000;
+    margin-right: 10px;
+    margin-left: 8%;
+    color: #FFFFFF;
+
+}
+.aboutBox p {
+    font-size: 1.3vw;
+    width: 80%;
+    margin-left: 10%;
+    max-width: fit-content;
+}
+.aboutBox .aboutImage {
+    width: 50%;
+    margin-right: 20px;
+    border-radius: 10px;    
+    z-index: 1;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0088a9;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 3%;
+}
+.btn:hover {
+  background-color: #006d8a;
+}
+#News {
+    position: relative;
+    background-image: url(../images/sandOpacity.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    margin-bottom: 0px;
+    padding-bottom: 80px;
+}
+#News h2 {
+    font-size: 4.5vw;
+    position: absolute;
+}   
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.news-item,
+.news-item2 {
+    position: absolute;
+    top: 16%;
+    margin: auto;
+    padding: 20px;
+    width: 32vw;
+    height: 80%;
+    animation: transitionIn 2s;
+}
+.news-item:hover,
+.news-item2:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+}
+.news-item {
+    left: 0%;
+    right: 65%;
+    background-color: #29304B;  
+    border-radius: 10%;
+}
+.news-item2 {
+    left: 64%;
+    right: 0%;
+    background-color: #29304B;
+    border-radius: 10%;
+}
+.news-item h3,
+.news-item2 h3 {
+    font-size: 2vw;
+    margin-top: 0;
+    font-weight: 500;
+}
+.news-item p,
+.news-item2 p {
+    font-size: 1.2vw;
+    margin-bottom: 0.2vh;
+}
+.news-item img, 
+.news-item2 img {
+    width: 23vw;
+    height: auto;
+    padding: 10px;
+    border-radius: 5%;
+}
+/* Overriding the footer with additional functionality*/
+footer{
+    bottom: 0;
+    width: 100%; 
+    padding: 20px 15%; 
+    background: #29304B; 
+    color: white;
+    display: flex; 
+    z-index: 2; 
+    scroll-snap-align: center;
+}
+@media only screen and (max-width: 768px) {
+    section#Home h1{
+        font-size: 7vw;
+    }
+    section#Home p{
+        font-size: 3vw;
+    }
+    section#About,
+    section .aboutBox {
+        flex-direction: column;
+    }
+    section {
+        height: 90%;
+        max-height: none;
+    }
+    section,
+    footer {
+        scroll-snap-align: none;
+    }
+    section#News,
+    section .news-item,
+    section .news-item2 {
+        flex-direction: column;
+        max-height: 20em;
+    }
+}
