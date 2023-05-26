@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="favs">
+    <h1>Favourite Menu Items</h1>
+    {% if favourites is not empty %}
+        <ul>
+        {% for menu in favourites %}
+            <li class="favs-item">
+                <h2>{{ menu.name }}</h2>
+                <p>Type: {{ menu.type }}</p>
+                <p>Ingredients: {{ menu.ingredients }}</p>
+                <p>Price: {{ menu.price }}</p>
+                <div class="buttons">
+                    <a href="removefavs.php?id={{ menu.id }}" class="button">Remove from Favourites</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No favourite menu items found.</p>
+    {% endif %}
+    <div class="buttons">
+        <form method="post" action="favourites-mail.php">
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <button type="submit" name="submit-favourites">Send by Email</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
