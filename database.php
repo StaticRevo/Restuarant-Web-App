@@ -86,7 +86,7 @@ class Db {
      */
     public function quote($value) {
         $connection = $this -> connect();
-        return "'" . $connection -> real_escape_string($value) . "'";
+        return $connection -> real_escape_string($value);
     }
     /**
      * Prepare a statement for execution
