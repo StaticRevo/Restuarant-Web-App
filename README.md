@@ -5,7 +5,7 @@ This repository contains the code and documentation to the Restaurant Website th
 
 - **Luca Gatt:**       About Page, Reservation Page (with database tables for forms)
 
-- **Kayla Formosa:**   Menu, Favourites
+- **Kayla Formosa:**   Menu, Menu Details, Favourites (database tables for each page)
 
 **Disclaimer:** Accurate information about team responsibilities and participation can be found in the documentation, which is not provided in the repository.
 
