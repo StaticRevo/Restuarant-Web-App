@@ -70,5 +70,3 @@ echo $twig->render($filename . '.html', [
     'error' => $error ?? null,
     'logged_in' => $_SESSION['logged_in']
 ]);
-
-

@@ -58,6 +58,7 @@ header{
 }
 .logo{  
     height: 10vh;
+    width: auto;
     cursor: pointer;
     display: block;
     transition: transform 0.2s ease;
@@ -250,7 +251,6 @@ footer div h3{
         display: none;
     } 
 */
-    
     /*header.responsive {
         position: relative;
     }*/
@@ -266,4 +266,3 @@ footer div h3{
 /*        text-align: left;*/
     }
 }
-

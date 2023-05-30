@@ -11,7 +11,7 @@ if ($menuId !== false) {
 
     if (count($menu) > 0) {
         $menu = $menu[0];
-        echo $twig->render('menudetails.html', ['menu' => $menu, 'title' => 'Dish Details', 'filename' => 'menudetails']);
+        echo $twig->render('menudetails.html', ['menu' => $menu, 'filename' => 'menudetails', 'logged_in' => $_SESSION['logged_in']]);
     } else {
         echo $twig->render('404.html', ['title' => '404', 'filename' => '404', 'logged_in' => $_SESSION['logged_in']]);
 

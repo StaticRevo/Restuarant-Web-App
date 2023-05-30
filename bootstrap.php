@@ -20,7 +20,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// SMTP settings provided by https://mailtrap.io/inboxes/2222697/messages
+// SMTP settings provided by inbox in https://mailtrap.io/inboxes/
 $mail = new PHPMailer();
 $mail->isSMTP();
 

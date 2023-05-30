@@ -86,4 +86,3 @@ $filename = "register";
 
 // Render view
 echo $twig->render($filename . '.html', ['title' => $title, 'filename' => $filename, 'error_message' => $error_message, 'validations' => $validations]);
-

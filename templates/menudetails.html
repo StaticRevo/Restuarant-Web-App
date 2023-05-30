@@ -9,20 +9,24 @@
 {% endblock %}
 
 {% block content %}
-<div class = "menudetails">
-    <div class = "menu-row">
+<div class="menudetails">
+    <div class="menu-row">
         <h3>{{ menu.name }}</h3>
     </div>
-    <div class = "menu-item">
+    <div class="menu-item">
         <ul>
             <li>Type: {{ menu.type }}</li>
             <li>Ingredients: {{ menu.ingredients }}</li>
             <li>Price: €{{ menu.price }}</li>
-            <div class = "buttons">
-                <a href = "" class="button">Add to Favourites</a>
-                <a href = "menu.php" class="button">Back</a>
+            <div class="buttons">
+                {% if not logged_in %}
+                    <a href="#" class="button sign-in-alert">Add to Favourites</a>
+                {% else %}
+                    <a href="favourites.php?id={{ menu.id }}" class="button add-to-favourites">Add to Favourites</a>
+                {% endif %}
+                <a href="menu.php" class="button">Back</a>
             </div>
         </ul>
     </div>
 </div>
-{% endblock %}
+{% endblock %}  
