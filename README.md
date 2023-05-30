@@ -11,7 +11,7 @@ This repository contains the code and documentation to the Restaurant Website th
 
 ## Important notes:
 - A **server** is needed. Using XAMPP, the developer has an Apache server to run the website locally. Follow [instructions to install XAMPP](https://github.com/StaticRevo/cis1054-part1-isaacattard-kaylaformosa-lucagatt/blob/main/Q1-setup-explaination.md).
-- **Database functionality:** [project.sql](sql/projectDatabase.sql) contains the SQL backup to import. If using XAMPP, import into your local [phpMyAdmin](localhost/phpmyadmin)
+- **Database functionality:** [projectDatabase.sql](sql/projectDatabase.sql) contains the SQL backup to import. If using XAMPP, import into your local [phpMyAdmin](localhost/phpmyadmin)
 - To use **Mailer**, one must enter his own username and password in [config.ini](config.ini) under `[mailer]` section. These are made up by a strings of characters which are given by [Mailtrap](https://mailtrap.io/inboxes) 'Email Testing' account. To apply your account details in [config.ini](config.ini):
    1. Click the [link](https://mailtrap.io/inboxes)
    2. Under integrations, select `PHPMailer`
